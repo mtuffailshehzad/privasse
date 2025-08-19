@@ -1,0 +1,14 @@
+# Laravel Cron Jobs
+* * * * * www-data cd /var/www && php artisan schedule:run >> /dev/null 2>&1
+
+# Backup database daily at 2 AM
+0 2 * * * www-data cd /var/www && php artisan backup:run >> /var/log/cron.log 2>&1
+
+# Clean up expired sessions weekly
+0 3 * * 0 www-data cd /var/www && php artisan session:gc >> /var/log/cron.log 2>&1
+
+# Clear application cache weekly
+0 4 * * 0 www-data cd /var/www && php artisan cache:clear >> /var/log/cron.log 2>&1
+
+# Generate sitemap daily
+0 5 * * * www-data cd /var/www && php artisan sitemap:generate >> /var/log/cron.log 2>&1
